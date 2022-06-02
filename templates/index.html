@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <title>Pomocnik komputerowy</title>
+</head>
+<body>
+    <div style="margin-top: 50px;" class="ui container">
+        <h1 class="ui center aligned header">Computer Service system</h1>
+        <form class="ui form" action="/add" method="post">
+            <div class="field">
+                <label>Device name: </label>
+                <input type="text" name="title" placeholder="Enter device name..."><br>
+                <label>Owner Name:</label>
+                <input type="text" name="owner" placeholder="Enter owner name..."><br>
+
+                <label>Deadline date: </label>
+                <input type="text" name="deadline" placeholder="Enter deadline date..."><br>
+                
+            </div>
+            <button class="ui green button" type="submit">Add</button>
+        </form>
+        
+        <hr>
+        <table>
+            <tr>
+                <th width="2">ID:</th>
+                <th width="100">Device Name: </th>
+                <th width="100">Owner Name</th>
+                <th width="100">Deadline Date: </th>
+                <th width="100">Date Owned: </th>
+            </tr>
+        </table>
+        <table>
+            
+        {% for todo in todo_list %}
+        <div class="ui segment">
+            <p class="ui big header">{{todo.id }} | {{ todo.title }} |  {{ todo.owner }} | {{  todo.dead_line  }}  |  {{ todo.date }}</p>
+
+            {% if todo.complete == False %}
+            <span class="ui gray label">Not Complete</span>
+            {% else %}
+            <span class="ui green label">Completed</span>
+            {% endif %}
+
+            <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+            <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </table>
+    </div>
+</body>
+</html>
